@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "相亲工作台只读数据": {
+      "command": "/ABSOLUTE/PATH/TO/WORKBENCH/.venv/bin/python",
+      "args": [
+        "/ABSOLUTE/PATH/TO/WORKBENCH/scripts/mcp/matchmaking_readonly_mcp.py"
+      ],
+      "env": {
+        "WORKBENCH_MCP_DB_PATH": "/ABSOLUTE/PATH/TO/WORKBENCH/.workbench/copy_workbench.sqlite3"
+      }
+    }
+  }
+}

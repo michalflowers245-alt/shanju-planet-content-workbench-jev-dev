@@ -1,0 +1,93 @@
+{
+  "metadata": {"version": "1.4.2", "role": "researcher"},
+  "input": {
+    "required": ["task", "brand_profile", "sources"],
+    "description": "写作任务、常用信息、内部资料与联网检索上下文"
+  },
+  "output": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief": {"type": "string"},
+      "source_assessments": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"source_id": {"type": "string"}, "source_role": {"type": "string", "enum": ["official", "report", "firsthand", "commentary", "unknown"]}, "relevance": {"type": "string"}, "supported_points": {"type": "array", "items": {"type": "string"}}, "limitations": {"type": "string"}}, "required": ["source_id", "source_role", "relevance", "supported_points", "limitations"]}},
+      "customer_questions": {"type": "array", "items": {"type": "string"}},
+      "objections": {"type": "array", "items": {"type": "string"}},
+      "competitor_patterns": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"pattern": {"type": "string"}, "source_ids": {"type": "array", "items": {"type": "string"}}, "source_urls": {"type": "array", "items": {"type": "string"}}}, "required": ["pattern", "source_ids", "source_urls"]}},
+      "angles": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"title": {"type": "string"}, "why": {"type": "string"}, "source_ids": {"type": "array", "items": {"type": "string"}}, "source_urls": {"type": "array", "items": {"type": "string"}}}, "required": ["title", "why", "source_ids", "source_urls"]}},
+      "recommended_angle": {"type": "object", "additionalProperties": false, "properties": {"title": {"type": "string"}, "reason": {"type": "string"}}, "required": ["title", "reason"]},
+      "strategy": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "surface_question": {"type": "string"},
+          "deeper_question": {"type": "string"},
+          "persona_fit": {"type": "string"},
+          "business_fit": {"type": "string"},
+          "real_scene": {"type": "string", "description": "用户材料或一手来源没有提供真实场景时，显式标注为示意场景，非真实客户/本人案例；不添加无来源的细节。"},
+          "reader_truth": {
+            "type": "object", "additionalProperties": false,
+            "properties": {"said_aloud": {"type": "string"}, "private_fear": {"type": "string"}, "decision_pressure": {"type": "string"}},
+            "required": ["said_aloud", "private_fear", "decision_pressure"]
+          },
+          "old_logic": {"type": "string"},
+          "what_changed": {"type": "string"},
+          "controlling_idea": {"type": "string"},
+          "editorial_promise": {"type": "string"},
+          "causal_chain": {
+            "type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "properties": {"cause": {"type": "string"}, "change": {"type": "string"}, "behavior": {"type": "string"}, "cost": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}},
+              "required": ["cause", "change", "behavior", "cost", "evidence_ids"]
+            }
+          },
+          "counter_boundary": {
+            "type": "object", "additionalProperties": false,
+            "properties": {"where_it_holds": {"type": "string"}, "where_it_fails": {"type": "string"}},
+            "required": ["where_it_holds", "where_it_fails"]
+          },
+          "interest_map": {
+            "type": "object", "additionalProperties": false,
+            "properties": {"benefits": {"type": "array", "items": {"type": "string"}}, "pays": {"type": "array", "items": {"type": "string"}}, "misjudges_because": {"type": "array", "items": {"type": "string"}}},
+            "required": ["benefits", "pays", "misjudges_because"]
+          },
+          "reader_cost": {"type": "string"},
+          "reader_decision": {"type": "string"},
+          "opening_options": {
+            "type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "properties": {"approach": {"type": "string"}, "line": {"type": "string"}, "why": {"type": "string"}},
+              "required": ["approach", "line", "why"]
+            }
+          },
+          "selected_opening": {"type": "string"},
+          "argument_beats": {
+            "type": "array", "items": {
+              "type": "object", "additionalProperties": false,
+              "properties": {"purpose": {"type": "string"}, "reader_gain": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}, "bridge": {"type": "string"}, "must_not_do": {"type": "string"}},
+              "required": ["purpose", "reader_gain", "evidence_ids", "bridge", "must_not_do"]
+            }
+          },
+          "ending_landing": {
+            "type": "object", "additionalProperties": false,
+            "properties": {"decision": {"type": "string"}, "cost": {"type": "string"}, "next_step": {"type": "string"}},
+            "required": ["decision", "cost", "next_step"]
+          },
+          "anti_repetition": {"type": "array", "items": {"type": "string"}},
+          "voice_direction": {"type": "string"},
+          "fact_boundaries": {"type": "array", "items": {"type": "string"}},
+          "must_preserve": {"type": "array", "items": {"type": "string"}}
+        },
+        "required": ["surface_question", "deeper_question", "persona_fit", "business_fit", "real_scene", "reader_truth", "old_logic", "what_changed", "controlling_idea", "editorial_promise", "causal_chain", "counter_boundary", "interest_map", "reader_cost", "reader_decision", "opening_options", "selected_opening", "argument_beats", "ending_landing", "anti_repetition", "voice_direction", "fact_boundaries", "must_preserve"]
+      },
+      "evidence_gaps": {"type": "array", "items": {"type": "string"}},
+      "conversion_hypothesis": {"type": "string"},
+      "life_case_observation": {"type": "object", "additionalProperties": false, "properties": {
+        "user_facts": {"type": "array", "items": {"type": "string"}},
+        "visible_facts": {"type": "array", "items": {"type": "string"}},
+        "uncertain_items": {"type": "array", "items": {"type": "string"}},
+        "privacy_notes": {"type": "array", "items": {"type": "string"}}
+      }, "required": ["user_facts", "visible_facts", "uncertain_items", "privacy_notes"]}
+    },
+    "required": ["brief", "source_assessments", "customer_questions", "objections", "competitor_patterns", "angles", "recommended_angle", "strategy", "evidence_gaps", "conversion_hypothesis", "life_case_observation"]
+  }
+}
